@@ -1,0 +1,165 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/********* SETUP *********/
+
+#setup {
+    position: absolute;
+    inset: 0;
+    visibility: visible;
+    z-index: 2;
+    background-color: skyblue;
+    text-align: center;
+    /*
+    &> * {
+        outline: 2px dashed magenta;
+    }
+    /**/
+}
+
+input[type="number"] {
+    border: 1px solid #777;
+    border-radius: 5px;
+}
+
+input[type="radio"] {
+    appearance: none;
+    margin: 32px 0 0 0;
+    
+    &+ label {
+        padding: 2px 4px;
+        font-size: 18pt;
+        background-color: transparent;
+    }
+    
+    &:checked + label {
+        outline: 2px solid black;
+        border-radius: 12px;
+        background-color: rgba(255, 255, 100, 0.4);
+    }
+}
+
+label {
+    font-size: 22.5px;
+}
+
+#numRounds {
+    margin: 16px 0 0 0;
+    width: 2em;
+    box-sizing: border-box;
+    font-size: 22.5px;
+}
+
+.playerInput {
+    display: flex;
+    margin-bottom: 4px;
+}
+
+#startBtn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+}
+
+
+/********** GAME **********/
+
+#game {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-color: #a7f2e1;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+#rollNum {
+    text-align: center;
+    margin: 6px;
+}
+
+.btnCont {
+    margin: 5%;
+    text-align: center;
+}
+
+.btn {
+    width: 96px;
+    height: 40px;
+    margin: 6px;
+    font-size: 130%;
+    border-radius: 5px;
+    border: 1px solid #777;
+    user-select: none;
+}
+
+.btn:active:not(:disabled) {
+        background-color: #f6f6f6;
+}
+
+#backBtn {
+    font-size: 100%;
+}
+
+#diceCont {
+    text-align: center;
+}
+
+.die {
+    width: 12vmin;
+    height: 12vmin;
+    margin: 2%;
+    image-rendering: pixelated;
+    
+    &.held {
+        outline: 3px solid orange;
+        border-radius: 0.5px;
+    }
+}
+
+.playerScore {
+    display: flex;
+    font-size: 20px;
+    
+    &> span {
+        width: 50%;
+    }
+    &> span:first-child {
+        text-align: right;
+    }
+}
+
+.winner {
+    animation: 1s infinite rainbow-text;
+}
+
+@keyframes rainbow-text {
+    0% {
+        color: red;
+    }
+    17% {
+        color: yellow;
+    }
+    33% {
+        color: lime;
+    }
+    50% {
+        color: cyan;
+    }
+    67% {
+        color: blue;
+    }
+    83% {
+        color: magenta;
+    }
+    100% {
+        color: red;
+    }
+}
