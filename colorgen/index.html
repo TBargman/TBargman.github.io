@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>Colors</title>
+        <link rel="stylesheet" href="./colors.css" />
+    </head>
+
+    <body>
+        <div id="main">
+            <div id="genContainer">
+                <div id="gen-colorContainer"></div>
+                <form id="genControls">
+                    <select id="codeType">
+                        <option value="hex">#Hex</option>
+                        <option value="rgb">rgb()</option>
+                        <option value="hsl">hsl()</option>
+                    </select>
+                    <select id="numColors">
+                        <option value="1">1 color</option>
+                        <option value="2">2 colors</option>
+                        <option value="3">3 colors</option>
+                        <option value="4">4 colors</option>
+                        <option value="5" selected>5 colors</option>
+                    </select>
+                    <button type="button" id="genBtn">Generate!</button>
+                </form>
+            </div>
+
+            <div id="pickerContainer">
+                <div id="pickerColorBox"></div>
+                <div id="pickerMode"></div>
+                <div id="pickerControls">
+                    <input type="range" min="0" max="255" value="0" />
+                    <input type="range" min="0" max="255" value="0" />
+                    <input type="range" min="0" max="255" value="0" />
+                </div>
+            </div>
+        </div>
+
+        <div id="menu">
+            <a href="#" id="colorpick">Color Picker</a> |
+            <a href="#" id="colorgen" class="selected">Color Generator</a>
+        </div>
+
+        <script src="./main.js" type="module"></script>
+    </body>
+</html>
