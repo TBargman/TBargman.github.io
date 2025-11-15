@@ -8,5 +8,5 @@ Any web code hosted here is written in my free time at my day job using a mobile
 * [Yotsee]
 * [Infinite Carousel]
 * [Calendar]
-* [Colors] /colorgen/index.html
+* [Colors] https://tbargman.github.io/colorgen/
 * [Rock, Paper, Scissors Sim]
