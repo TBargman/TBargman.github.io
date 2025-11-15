@@ -1,5 +1,3 @@
-A "portfolio" site of my unfinished bullshit.
-
 Any web code hosted here is written in my free time at my day job using a mobile IDE. As a result, these pages are intended to run in mobile browsers and will probably look/behave weirdly elsewhere. Don't take it too seriously lol.
 
 ([Just the repo for me, thanks](https://github.com/TBargman/TBargman.github.io/tree/main))
@@ -26,7 +24,7 @@ Uses the infinite carousel idea for a scrollable calendar, complete with daily s
 I have a thing for colors, and find myself using HSL sliders often. "Why not make my own?" I thought. Another experiment in creating web components. Also includes a random color generator that gives you hex, RGB and HSL values. 
 
 ### [Rock, Paper, Scissors Sim][rps]
-Insired by [this video](https://www.tiktok.com/@cbmemess/video/7424512892726430979).\
+Inspired by [this video](https://www.tiktok.com/@cbmemess/video/7424512892726430979).\
 Wow, collision detection is a bitch. This should've been done with Canvas anyway haha. It's not very exciting, as icons target each other too well and it's all over quickly.
 
 [garden]: ./garden/
