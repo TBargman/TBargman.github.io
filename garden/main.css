@@ -1,0 +1,587 @@
+/*** LOADER ***/
+
+#loader {
+    z-index: 999;
+    background: #9EC63D;
+    position: absolute;
+    inset: 0;
+    align-content: center;
+    text-align: center;
+}
+
+#progressBar {
+    width: 0;
+    height: 10vh;
+    background: deepskyblue;
+    visibility: hidden;
+}
+
+#progressText {
+    font-size: 16vmin;
+}
+
+
+/***** GLOBAL RULES *****/
+
+
+button {
+    border-radius: 1vmin;
+    border: 3px solid;
+    font-size: 18pt;
+    font-weight: 600;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    paint-order: stroke fill;
+}
+
+button>img {
+    height: 60%;
+    width: 60%;
+}
+
+
+/******************** MAIN LAYOUT ********************/
+
+
+html,
+body {
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    user-select: none;
+}
+
+body {
+    background-image: linear-gradient(#9EC63D, darkolivegreen);
+    margin: 0;
+    padding: 0;
+    align-content: center;
+    justify-items: center;
+}
+
+#topBar {
+    position: absolute;
+    inset: 0 0 auto 0;
+    align-content: center;
+    height: 48px;
+    padding-left: 3vw;
+    border-bottom: 2px solid #aa7900;
+    background-image: linear-gradient(#EAC94D, #daa920);
+}
+
+#garden {
+    position: absolute;
+    inset: 50px 0 15% 0;
+    padding: 30px;
+    align-content: center;
+    justify-content: center;
+    overflow: scroll;
+    border-bottom: 2px solid #46581f;
+    border-radius: 0 0 10px 10px;
+}
+
+.bottomMenu {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2%;
+    /*background-image: linear-gradient(#EAC94D, #daa920);/**/
+    /*border-top: 2px solid #aa7900;/**/
+    background-image: linear-gradient(#EAC94D20, darkolivegreen);
+    /**/
+    border-top: 2px solid darkolivegreen;
+    /**/
+    border-radius: 10px 10px 0 0;
+}
+
+
+/********************** TOP BAR *********************/
+
+#moneyContainer {
+    position: absolute;
+    inset: 0 56px 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+#mainCoin {
+    margin-left: 8px;
+    width: 24px;
+    height: 24px;
+}
+
+#moneycount {
+    text-align: right;
+    font-weight: 600;
+    font-size: 15pt;
+    color: antiquewhite;
+    -webkit-text-stroke: 3px;
+    -webkit-text-stroke-color: #aa7900;
+    paint-order: stroke fill;
+}
+
+#mainTitle {
+    font-size: 18pt;
+    font-weight: 900;
+    color: antiquewhite;
+    -webkit-text-stroke: 3px;
+    -webkit-text-stroke-color: #aa7900;
+    paint-order: stroke fill;
+}
+
+/********************** GARDEN **********************/
+
+.gardenRow {
+    display: flex;
+    width: fit-content;
+}
+
+.iconCont {
+    position: relative;
+    align-content: center;
+    text-align: center;
+    border: 2px outset #46581f;
+    border-radius: calc(1vmin + 2px);
+}
+
+.plotIcon {
+    margin: 0.5px;
+    min-height: 50px;
+    min-width: 50px;
+}
+
+.plotIconImg {
+    height: 60%;
+    width: 60%;
+}
+
+.tillIcon {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    height: 70%;
+    width: 70%;
+    filter: drop-shadow(0 0 4px #3D5AC6);
+}
+
+.covered {
+    filter: blur(1.5px);
+    opacity: 0.4;
+}
+
+.plotProgBar {
+    background-color: #EAC94D;
+    position: absolute;
+    bottom: 0;
+    top: 90%;
+    width: 0;
+    /*outline: 1px solid #354b0f;/**/
+    visibility: hidden;
+    border-radius: 0 0 1vmin 1vmin;
+    z-index: -200;
+}
+
+.progBarWatered {
+    background-color: #90daff;
+}
+
+.complete {
+    background-color: #3D5AC6;
+}
+
+
+/********************* MARKET **********************/
+
+#market {
+    visibility: hidden;
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(#9EC63D, #84A731 6%);
+}
+
+#market>h2 {
+    margin: 8px;
+    font-size: 20pt;
+    text-align: center;
+    color: #efd;
+    margin: 12px;
+    -webkit-text-stroke: 3px darkolivegreen;
+    paint-order: stroke fill;
+}
+
+/*
+#market * {
+    outline: 2px dashed cyan;
+}
+*/
+#marketBackBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 6px;
+}
+
+.marketItem {
+    display: flex;
+    align-items: center;
+}
+
+.marketItem>div {
+    margin: 0 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.marketItem>span {
+    font-size: ;
+    margin-right: 20px;
+}
+
+.marketItem>div>button {
+    width: 56px;
+}
+
+.marketItem>div>span {
+    display: flex;
+    text-align: center;
+    font-size: 18px;
+    align-items: center;
+}
+
+.marketImg {
+    margin: 12px;
+    height: 42px;
+    width: 42px;
+}
+
+.marketItemCount {
+    font-size: 24pt;
+}
+
+.modeSwitchBtn {
+    width: 50%;
+    border-width: 3px 3px 0 3px;
+    border-radius: 2vmin 2vmin 0 0;
+    font-size: 16pt;
+}
+
+.buySwitch {
+    background-color: #94b0d7;
+    border-color: #2d6aab;
+    color: #083c71;
+}
+
+.sellSwitch {
+    background-color: #d59b93;
+    border-color: #b34134;
+    color: #590c03;
+}
+
+.marketItemsCont {
+    padding-top: 12px;
+    z-index: 10;
+    position: absolute;
+    inset: 82.5px 0 0 0;
+    border: 3px solid;
+    overflow: scroll;
+}
+
+.marketBuyCont {
+    background-image: linear-gradient(#94b0d7 5%, #4c7fb5);
+    border-color: #2d6aab;
+}
+
+.marketSellCont {
+    background-image: linear-gradient(#d59b93 5%, #b35f54);
+    border-color: #b34134;
+}
+.buyBtn {
+    color: #083c71;
+    border-color: #083c71;
+    background-image: linear-gradient(#2588f1, #0071e8);
+}
+.sellBtn {
+    color: #590c03;
+    border-color: #590c03;
+    background-image: linear-gradient(#ee533f, #ef2408);
+}
+
+.coin-tiny {
+    height: 12px;
+    margin: 3px;
+}
+
+
+/****************** BOTTOM MENUS *******************/
+
+#plotMenu {
+    visibility: hidden;
+}
+
+.clip {
+    height: 50px;
+    width: 76%;
+    margin: 0 0 10px 0;
+    align-content: center;
+    clip-path: inset(0);
+}
+
+#plotMenuTitle {
+    visibility: inherit;
+    position: absolute;
+    font-size: 30px;
+    top: 14%;
+    font-weight: 700;
+    margin: 0 0 0 8px;
+    color: #efd;
+    -webkit-text-stroke: 4px darkolivegreen;
+    paint-order: stroke fill;
+}
+
+#plantTimer {
+    position: absolute;
+    font-size: 24px;
+    top: 14%;
+    right: 104px;
+    font-weight: 700;
+    text-align: right;
+    color: #efd;
+    -webkit-text-stroke: 4px darkolivegreen;
+    paint-order: stroke fill;
+}
+
+.plotMenuBtn {
+    margin: 0 4px;
+    height: 40px;
+    flex: 1 1 auto;
+    border-color: #005b00;
+    background-image: linear-gradient(limegreen, forestgreen);
+    color: #efd;
+    font-size: 18;
+    -webkit-text-stroke: 2.5px darkgreen;
+}
+
+#newPlantBtn {
+    height: 50px;
+    width: 50px;
+}
+
+#seedMenuCont {
+    position: relative;
+    width: 100%;
+}
+
+#seedMenu {
+    position: absolute;
+    top: 0;
+    left: 60px;
+    width: 80%;
+    padding-left: 2px;
+    align-content: center;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 48px;
+    column-gap: 8px;
+    overflow: scroll;
+}
+
+.show {
+    left: 0;
+    transition: left 200ms ease-out 50ms;
+}
+
+.hide {
+    left: 105%;
+    transition: left 200ms ease-in;
+}
+
+.fade-in {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 300ms 200ms;
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 200ms;
+}
+
+.seedIcon {
+    background-image: linear-gradient(#A6C979, #8DBA53);
+    position: relative;
+    outline: none;
+    border: 3px solid #46581f;
+    height: 44px;
+    width: 44px;
+}
+
+.seedIconImg {
+    height: 70%;
+    width: 70%;
+}
+
+.disabledIcon {
+    background-image: linear-gradient(#aaa, #888);
+    border-color: #4a4a4a;
+}
+
+.disabledImg {
+    filter: grayscale(100%);
+}
+
+.seedCount {
+    text-align: right;
+    position: absolute;
+    width: 100%;
+    font-size: 12px;
+    font-weight: 900;
+    right: 3px;
+    bottom: 0;
+}
+
+.flexBtnCont {
+    display: flex;
+    justify-content: center;
+}
+
+.waterBtn {
+    position: absolute;
+    top: 10px;
+    right: 56px;
+    font-size: 12pt;
+    background-image: linear-gradient(#278be7, #1863c9);
+    border-color: #0345a0;
+    color: #80e4ff;
+    -webkit-text-stroke: 2.5px #0345a0;
+}
+
+.watered {
+    box-shadow: 0 0 10px #67beff;
+    background-image: linear-gradient(#67beff, #1863c9);
+}
+
+.closeBtn {
+    position: absolute;
+    right: 12px;
+    top: 10px;
+    background-image: linear-gradient(#f66, #d44);
+    border-color: darkred;
+    color: darkred;
+}
+
+
+/******************** MAIN MENU *********************/
+
+#mainMenuBtn {
+    position: absolute;
+    margin: 6px;
+    top: 0;
+    right: 0;
+    border-color: #aa7900;
+    background-image: linear-gradient(to right top, #EAC94D, #E5BB1F);
+    color: #aa7900;
+}
+
+#mainMenu {
+    visibility: hidden;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 50px);
+    background-image: linear-gradient(#84A731, darkolivegreen);
+    z-index: 900;
+    padding: 0;
+}
+
+.mainMenuItem {
+    align-content: center;
+    padding-left: 10px;
+    font-size: 20px;
+    border: 2px solid darkolivegreen;
+    background-image: linear-gradient(#9EC63D, #84A731);
+    height: 6vh;
+    width: calc(100% - 14px);
+}
+
+.foldCont,
+.foldSubItem {
+    width: 100%;
+}
+
+.foldSubItem {
+    padding: 10px 0;
+    justify-content: center;
+}
+
+#menuInventory {
+    background-color: #7C9D2C;
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    grid-auto-rows: 50px;
+}
+
+.invItem {
+    display: grid;
+    place-content: stretch;
+    grid-template-rows: 30% 70%;
+    grid-template-areas: "icon plantCount" "icon seedCount";
+}
+
+.invIcon {
+    grid-area: icon;
+    height: 10vmin;
+    width: 10vmin;
+}
+
+.invSeedCount {
+    grid-area: seedCount;
+    align-self: start;
+}
+
+.invPlantCount {
+    grid-area: plantCount;
+    align-self: end;
+}
+
+.saveText {
+    visibility: hidden;
+    transition: opacity 0;
+    position: fixed;
+    text-align: center;
+    inset: 70% 0 0 0;
+    font-size: 30pt;
+    font-weight: 600;
+}
+
+/*************** GLOBAL OVERRIDES ****************/
+
+.selected {
+    border-color: #3D5AC6;
+    box-shadow: 0 0 2px #3D5AC6;
+}
+
+button:disabled {
+    background-image: linear-gradient(#777, #555);
+    border-color: #444;
+    color: #444;
+    -webkit-text-stroke: 0;
+}
+
+.outlined {
+    outline: 2px dashed magenta;
+}
+
+.delay {
+    transition-delay: 2s;
+}
+
+.transparent {
+    opacity: 0;
+}
