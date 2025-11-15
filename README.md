@@ -23,11 +23,11 @@ A little test for a carousel that scrolls left/right to your heart's content, wi
 Uses the infinite carousel idea for a scrollable calendar, complete with daily schedule views. (Incomplete with the infinite carousel that doesn't work yet, and the ability to add events to your schedule lmao)
 
 ### [Colors][colorgen]
-I have a thing for colors, and find myself using HSL sliders often. "Why not make my own?" I thought. Also includes a random color generator.
+I have a thing for colors, and find myself using HSL sliders often. "Why not make my own?" I thought. Another experiment in creating web components. Also includes a random color generator that gives you hex, RGB and HSL values. 
 
 ### [Rock, Paper, Scissors Sim][rps]
 Insired by [this video](https://www.tiktok.com/@cbmemess/video/7424512892726430979).
-Wow, collision detection is a bitch. This should'vr been done with Canvas haha.
+Wow, collision detection is a bitch. This should've been done with anyway Canvas haha. It's not very exciting, as icons target each other too well and it's all over quickly.
 
 [garden]: ./garden/
 [canvas]: ./canvas/index.md
