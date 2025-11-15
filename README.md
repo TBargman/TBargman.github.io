@@ -12,9 +12,9 @@ Any web code hosted here is written in my free time at my day job using a mobile
 * [Rock, Paper, Scissors Sim][rps]
 
 [garden]: #
-[canvas]: #
-[yah]: #
-[infcar]: #
+[canvas]: ./canvas/
+[yah]: ./yotsee/
+[infcar]: ./infcar/
 [cal]: #
 [colorgen]: ./colorgen/
 [rps]: #
