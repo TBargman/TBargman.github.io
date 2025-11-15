@@ -149,7 +149,7 @@ a {
     }
     &.handle {
         top: -0.5vmin;
-        left: -0.5vmin;
+        left: -1vmin;
         width: 2vmin;
         border-width: 0.5vmin;
         outline-width: 0.5vmin;
