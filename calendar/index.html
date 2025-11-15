@@ -1,0 +1,30 @@
+<html lang="en-US">
+
+<head>
+    <title>Calendar</title>
+    <link rel="stylesheet" href="./calendar.css">
+</head>
+
+<body>
+    <!--<button id="colorBtn">Color</button>-->
+    <div class="main">
+        <div id="titlebar"></div>
+        <div id="calendar" class="container"></div>
+        <div class="fade left"></div>
+        <div class="fade right"></div>
+    </div>
+    <div class="dateViewMain">
+        <div class="dateViewTitle"></div>
+        <button id="dateViewCloseBtn"></button>
+        <div id="dateViewSchedule"></div>
+        <div id="dateViewEvent" style="display: none">
+            <div class="dateViewEventName"></div>
+            <div class="dateViewEventTimes"></div>
+            <div class="dateViewEventNotes"></div>
+        </div>
+    </div>
+    
+    <script type="module" src="./calendar.js"></script>
+</body>
+
+</html>
