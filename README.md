@@ -6,8 +6,8 @@ Any web code hosted here is written in my free time at my day job using a mobile
 * [Garden thing][garden]
 * [Canvas Shenanigans][canvas]
 * [Yotsee][yah]
-* [Infinite Carousel][infcar]
-* [Calendar][cal]
+* [Infinite Carousel Demo][infcar]
+* [Calendar Web App][cal]
 * [Colors][colorgen]
 * [Rock, Paper, Scissors Sim][rps]
 
