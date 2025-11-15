@@ -1,0 +1,285 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+:root {
+    font-family: "Inter";
+    --primary-hue: 215;
+    --analogous1: calc(var(--primary-hue) + 40);
+    --analogous2: calc(var(--primary-hue) - 40);
+    --complement: calc(var(--primary-hue) + 180);
+    --desaturate: 0;
+    --darken: 0;
+    --main-bgcolor: white;
+    /*color-scheme: light dark;*/
+}
+
+html::selection {
+    background-color: hsl(var(--primary-hue),100%,85%);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /**/
+    background-color: light-dark(var(--main-bgcolor), #333);
+}
+
+#colorBtn {
+    transform: scale(1.5);
+    transform-origin: top left;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    margin: 1vh 2vw;
+    height: 98vh;
+    width: 96vw;
+    transition: filter 200ms;
+    user-select: none;
+}
+
+#titlebar {
+    height: 5%;
+    margin: 0 0 2%;
+    text-align: center;
+    background-color: hsl(var(--complement),90%,95%);
+    border: 2px solid hsl(var(--complement),60%,70%);
+    border-radius: 0.5vmax;
+}
+
+#calendar {
+    position: absolute;
+    display: flex;
+    top: 7%;
+    left: 0;
+    height: 95%;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    /*outline: 2px dashed red; /**/
+}
+
+.fade {
+    position: absolute;
+    top: 7%;
+    bottom: 0;
+    width: 5%;
+    z-index: 1;
+    &.left {
+        left: 0;
+        background-image: linear-gradient(90deg, var(--main-bgcolor) 5%, transparent);
+    }
+    &.right {
+        right: 0;
+        background-image: linear-gradient(270deg, var(--main-bgcolor) 5%, transparent);
+    }
+}
+
+.weekView {
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    height: 95%;
+    min-width: 90%;
+    margin: 0 5%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    /*outline: 2px dashed cyan; /**/
+}
+
+.weekView:nth-child(2) { left: 100%; }
+.weekView:nth-child(3) { left: 200%; }
+
+.weekViewDay {
+    align-content: center;
+    padding: 0 3vmax;
+    margin: 0 0 -2px 0;
+    height: calc(100% / 7 - 3px);
+    font-size: 3vh;
+    font-weight: 600;
+    text-shadow: 0.5px 0.5px #ffffffbb;
+    color: hsl(var(--primary-hue),100%,18%);
+    background-image: linear-gradient(hsl(var(--primary-hue),90%,80%), hsl(var(--primary-hue),85%,70%));
+    border: 2px solid hsl(var(--primary-hue),50%,50%);
+    border-radius: 0.7vmax;
+    transition-property: margin;
+    transition-duration: 300ms;
+    /*outline: 2px dashed lime; /**/
+    
+    &.today {
+        /*background-color: hsl(var(--analogous1),60%,80%);*/
+        background-image: linear-gradient(hsl(var(--analogous1),60%,80%), hsl(var(--analogous1),60%,70%));
+        border-color: hsl(var(--analogous1),60%,40%);
+        color: hsl(var(--analogous1),100%,18%);
+        z-index: 1;
+    }
+}
+
+.weekViewDay:hover { margin: calc(1vmax + 2px) 1vmax 1vmax; }
+.weekViewDay:active { margin: calc(2vmax + 2px) 2vmax 2vmax; }
+/*
+.weekViewDay:nth-child(1){ background-color: hsl(var(--primary-hue),100%,85%); }
+.weekViewDay:nth-child(2){ background-color: hsl(var(--primary-hue),90%,80%); }
+.weekViewDay:nth-child(3){ background-color: hsl(var(--primary-hue),73%,75%); }
+.weekViewDay:nth-child(4){ background-color: hsl(var(--primary-hue),61%,70%); }
+.weekViewDay:nth-child(5){ background-color: hsl(var(--primary-hue),50%,65%); }
+.weekViewDay:nth-child(6){ background-color: hsl(var(--primary-hue),40%,60%); }
+.weekViewDay:nth-child(7){ background-color: hsl(var(--primary-hue),35%,55%); }
+*/
+
+.monthView {
+    width: 100%;
+    table-layout: fixed;
+    /*border-collapse: collapse; /**/
+    background-color: hsl(var(--primary-hue),60%,60%);
+    border-radius: 7px;
+}
+
+.monthView tr:first-child {
+    height: 24px;
+}
+
+.monthView td {
+    align-content: start;
+    text-align: center;
+    padding: 6px;
+    border-radius: 5px;
+}
+
+.monthView th {
+    max-height: 16px;
+}
+
+.monthView .even { background-color: hsl(var(--primary-hue),70%,70%); }
+.monthView .odd { background-color: hsl(var(--primary-hue),80%,80%); }
+.monthView.today { background-color: hsl(var(--analogous1),80%,80%); }
+.otherMonth { background-color: hsl(var(--primary-hue),45%,75%); }
+
+
+
+.dateViewMain {
+    position: absolute;
+    height: 60%;
+    width: 76%;
+    top: 20vh;
+    left: 12%;
+    border: 2px solid hsl(var(--primary-hue),50%,40%);
+    border-radius: 1vmax;
+    background-color: light-dark(white, #333);
+    opacity: 0;
+    z-index: -1;
+    transform: scale(1.25);
+    transition: opacity 300ms, transform 300ms;
+}
+
+.dateViewTitle {
+    height: 6vmax;
+    margin: 0 4%;
+    align-content: center;
+    font-size: 4vmax;
+    /*outline: 2px dashed green;*/
+}
+
+#dateViewCloseBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 4vmax;
+    width: 4vmax;
+    border: none;
+    outline: 2px solid hsl(0,60%,40%);
+    border-radius: 1px 0.7vmax 1px 85%;
+    /*background-color: hsl(10,100%,65%);*/
+    background-image: linear-gradient(hsl(10,100%,65%), 65%, hsl(10,70%,50%));
+}
+
+#dateViewCloseBtn::after {
+    content: "+";
+    position: absolute;
+    bottom: 12%;
+    left: 35%;
+    font-size: 4vmax;
+    transform: rotate(45deg);
+}
+
+#dateViewSchedule {
+    position: absolute;
+    padding-top: 2vmax;
+    overflow: scroll;
+    inset: 6vmax 6% 3% 0;
+    /*border: 2px dashed cyan; /**/
+}
+
+#dateViewSchedule > div:not(#scheduleEventCont) {
+    position: relative;
+    min-height: 4vmax;
+    margin-left: 2%;
+    border-top: 2px solid #bbb;
+    user-select: none;
+    /*outline: 1px dashed magenta; /**/
+}
+
+#dateViewSchedule div > span {
+    display: block;
+    position: absolute;
+    top: -1vmax;
+    width: fit-content;
+    min-width: 5vmax;
+    padding-right: 1vmax;
+    font-size: 2vmax;
+    text-align: right;
+    align-content: center;
+    background-color: white;
+    /*outline: 1px dashed red; /**/
+}
+
+#scheduleEventCont {
+    position: absolute;
+    height: 100%;
+    top: 2px;
+    left: 8vmax;
+    right: 1vmax;
+    /*background-color: #0099ff20;
+    outline: 2px dashed #0080ff99; /**/
+}
+
+.eventItem {
+    position: absolute;
+    /*max-width: 10vmin;*/
+    padding-top: 6px;
+    text-align: center;
+    font-size: 2vmax;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    outline: 2px solid hsl(var(--complement),100%,50%);
+    background-color: hsla(var(--complement),100%,95%,0.8);
+    border-radius: 2px;
+    user-select: none;
+}
+
+.eventItem.fromPrev::before {
+    content: "^";
+    position: absolute;
+}
+    
+.eventItem.toNext::before {
+    content: "v";
+    position: absolute;
+}
+
+
+
+
+
+
+
+
+
+
+
+.no-anim {
+    transition: none;
+}
