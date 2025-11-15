@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Yotsee</title>
+        <link rel="stylesheet" href="./yotsee.css" />
+    </head>
+    <body>
+        <div id="setup">
+            <h1>Rules:</h1>
+            <input type="radio" name="rules" id="radioCl" value="classic" />
+            <label for="radioCl">Classic (not finished)</label>
+            <input type="radio" name="rules" id="radioPoker" value="poker" checked />
+            <label for="radioPoker">Poker-like</label>
+            <br />
+            <div id="numRoundsCont">
+                <label for="numRounds">Rounds: </label>
+                <input type="number" id="numRounds" min="1" placeholder="5" />
+            </div>
+            <button type="button" id="startBtn" class="btn">Play</button>
+            
+            <div>
+                <label for="debugCheckbox">DEBUG</label>
+                <input type="checkbox" id="debugCheckbox" checked />
+            </div> <!---->
+        </div>
+        <div id="game">
+            <h1 id="header"></h1>
+            <div id="rollNum">&nbsp;</div>
+            <div id="diceCont"></div>
+            <div class="btnCont">
+                <button type="button" class="btn" id="rollBtn">Roll</button>
+                <button type="button" class="btn" id="endBtn" disabled>End Turn</button>
+            </div>
+            <div id="scores"></div>
+            <div id="endGameBtnCont" class="btnCont">
+                <button type="button" class="btn" id="backBtn">Back to Setup</button>
+                <button type="button" class="btn" id="resetBtn">Play Again</button>
+            </div>
+        </div>
+        <script type="module" src="./main.js"></script>
+    </body>
+</html>
