@@ -15,7 +15,7 @@ Any web code hosted here is written in my free time at my day job using a mobile
 * [Rock, Paper, Scissors Sim][rps]
 
 [garden]: ./garden/
-[canvas]: ./canvas/
+[canvas]: ./canvas/index.md
 [yah]: ./yotsee/
 [infcar]: ./infcar/
 [cal]: ./calendar/
