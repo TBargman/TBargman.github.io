@@ -4,4 +4,4 @@ title: Spaghetti
 ---
 
 * [Joystick](./joystick/)
-* [Draw by px](./px&%20manipulation/)
+* [Draw by px](./px%20manipulation/)
