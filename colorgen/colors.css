@@ -40,7 +40,7 @@ button:active {
     inset: 92% 0 0 0;
     text-align: center;
     align-content: center;
-    font-size: 175%;
+    font-size: 6vmin;
     user-select: none;
 }
 
@@ -54,7 +54,7 @@ a {
         background-color: var(--link-color);
         position: absolute;
         width: 0;
-        height: 2px;
+        height: 0.5vmin;
         bottom: 0;
         left: 50%;
         transition:
@@ -131,7 +131,8 @@ a {
     width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #ffffff33;
+    align-items: center;
+    background-color: #ffffff;
     & > div {
         flex-grow: 1;
     }
@@ -140,38 +141,36 @@ a {
 .slider {
     --anim-time: 200ms;
     position: absolute;
-    height: 40px;
-    border: 2px solid white;
-    outline: 2px solid black;
-    border-radius: 6px;
+    height: 10vmin;
+    border: 0.5vmin solid white;
+    outline: 0.5vmin solid black;
+    border-radius: 1.5vmin;
     &.rail {
-        width: 300px;
-        left: 50px;
+        width: 75vw;
     }
     &.handle {
-        top: -2px;
-        left: -2px;
-        width: 10px;
-        border-width: 2px;
-        outline-width: 2px;
+        top: -0.5vmin;
+        left: -0.5vmin;
+        width: 2vmin;
+        border-width: 0.5vmin;
+        outline-width: 0.5vmin;
         /*z-index: 10;*/
         transition:
             top var(--anim-time),
             height var(--anim-time);
         &.dragging {
-            top: -6px;
-            height: 48px;
+            top: -1.5vmin;
+            height: 12vmin;
         }
     }
 }
 
 #colorPreview {
     position: absolute;
-    top: 35px;
-    left: calc(50vw - 50px);
-    height: 100px;
-    width: 100px;
-    border: 2px solid white;
-    outline: 2px solid black;
-    border-radius: 6px;
+    top: 10vh;
+    height: 30vmin;
+    width: 30vmin;
+    border: 0.5vmin solid white;
+    outline: 0.5vmin solid black;
+    border-radius: 1.5vmin;
 }
