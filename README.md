@@ -27,7 +27,7 @@ I have a thing for colors, and find myself using HSL sliders often. "Why not mak
 
 ### [Rock, Paper, Scissors Sim][rps]
 Insired by [this video](https://www.tiktok.com/@cbmemess/video/7424512892726430979).
-Wow, collision detection is a bitch. This should've been done with anyway Canvas haha. It's not very exciting, as icons target each other too well and it's all over quickly.
+Wow, collision detection is a bitch. This should've been done with Canvas anyway haha. It's not very exciting, as icons target each other too well and it's all over quickly.
 
 [garden]: ./garden/
 [canvas]: ./canvas/index.md
