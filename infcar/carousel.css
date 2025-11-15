@@ -1,0 +1,48 @@
+:root {
+    --bgcolor: #2d2d33;
+}
+
+html, body {
+    background-color: var(--bgcolor);
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 10%;
+    &.left {
+        left: 0;
+        background-image: linear-gradient(90deg, var(--bgcolor), transparent);
+    }
+    &.right {
+        right: 0;
+        background-image: linear-gradient(-90deg, var(--bgcolor), transparent);
+    }
+}
+
+#carousel {
+    position: absolute;
+    display: flex;
+    inset: 3% 0;
+    outline: 2px dashed blue;
+    overflow: scroll;
+    touch-action: none;
+}
+
+.carousel-item {
+    margin: 10%;
+    min-width: 80%;
+    max-width: 80%;
+    font-size: 20vmin;
+    color: white;
+    text-shadow: 0 1px rgba(0,0,0,.3);
+    border: 2px solid hsl(210,100%,30%);
+    border-radius: 8vmin;
+    text-align: center;
+    align-content: center;
+    background-image: linear-gradient(hsl(210,100%,55%), hsl(210,100%,45%));
+}
