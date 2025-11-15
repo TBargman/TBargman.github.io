@@ -133,7 +133,7 @@ ColorSliders.init("hsl");
 let c = 0;
 for (let s in ColorSliders.sliders) {
     pickerContainer.appendChild(ColorSliders.sliders[s].element);
-    ColorSliders.sliders[s].element.style.top = 180 + c * 55 + "px";
+    ColorSliders.sliders[s].element.style.top = 60 + c * 14 + "vmin";
     c++;
 }
 ColorSliders.setColor([200, 90, 60]);
