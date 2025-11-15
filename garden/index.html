@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <title>Garden</title>
+    <link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+    
+    <div id="garden"></div>
+    
+    <div id="topBar">
+        <span id="mainTitle">Garden thing</span>
+        <div id="moneyContainer">
+            <span id="moneyCount"></span>
+            <img src="./assets/coin-small.png" id="mainCoin">
+        </div>
+        <button type="button" class="btn" id="mainMenuBtn">...</button>
+    </div>
+    
+    <div id="mainMenu">
+        <div id="market" style="visibility: hidden;"></div>
+    </div>
+    
+    <div id="plotMenu" class="bottomMenu">
+        <div class="clip">
+            <h2 id="plotMenuTitle" class="fade-in"></h2>
+            <div id="seedMenuCont" class="hide">
+                <button type="button" class="plotMenuBtn" id="newPlantBtn" disabled>Plant</button>
+                <div id="seedMenu"></div>
+            </div>
+        </div>
+        <div class="flexBtnCont">
+            <button type="button" class="plotMenuBtn" id="seedsBtn" disabled>Seeds</button>
+            <button type="button" class="plotMenuBtn" id="harvestBtn" disabled>Harvest</button>
+        </div>
+        <span id="plantTimer" class="fade-out"></span>
+        <button type="button" class="waterBtn" id="waterBtn" disabled>💦</button>
+        <button type="button" class="btn closeBtn" id="plotMenuCloseBtn">X</button>
+    </div>
+    
+    <div id="loader">
+        <div id="progressBar"></div>
+        <span id="progressText"></span>
+    </div>
+    
+    <script defer src="loader.js"></script>
+    <script type="module" src="./main.js"></script>
+    <script type="module" src="./mainMenu.js"></script>
+    
+</body>
+
+</html>
