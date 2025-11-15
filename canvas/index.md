@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Spaghetti
-permalink: https://tbargman.github.io/canvas/
 ---
 
 * [Joystick](./joystick/)
