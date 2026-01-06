@@ -1,0 +1,152 @@
+:root {
+    /* open-point is set in JS,
+    70% is a good starting value */
+    --open-point: 70%;
+    --closed-point: 50px;
+}
+
+html,
+body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    overflow: hidden;
+}
+
+#filterMenu {
+    box-sizing: border-box;
+    background-image: linear-gradient(#cde6ff, #99ccff var(--open-point));
+    position: absolute;
+    inset: 0;
+    padding: 0 6vmin;
+    z-index: 0;
+
+    &::after {
+        content: "\25B2";
+        position: absolute;
+        left: 49%;
+        top: calc(var(--open-point) - 26px);
+        color: #0006;
+        transform: scale(1.8, 0.8);
+        transition: opacity 200ms 400ms;
+    }
+}
+
+.menu-title {
+    --fontSize: 23px;
+
+    text-align: center;
+    color: #014;
+    font-size: var(--fontSize);
+    text-shadow: #def 1px 1px;
+    margin: calc(var(--fontSize) / 2) 0;
+
+    transition: opacity 400ms ease;
+    &.hide {
+        opacity: 0;
+        transition-delay: 50ms;
+    }
+    &.show {
+        transition-delay: 400ms;
+    }
+}
+
+#results-main {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr;
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: calc(100% - var(--closed-point));
+    outline: 1px solid #678;
+    padding: max(5%, 24px);
+    background-color: #fff;
+    z-index: 20;
+    animation-duration: 400ms;
+    overflow: scroll;
+    transition: background-color 300ms 100ms;
+    & * {
+        transition: filter 300ms 100ms;
+    }
+}
+
+#result-sort {
+    margin-bottom: 30px;
+}
+
+#result-cont {
+    grid-column: 1 / 3;
+}
+
+.filters-open {
+    &#results-main {
+        height: calc(100% - var(--open-point));
+        top: var(--open-point);
+        background-color: #bbb;
+        & * {
+            filter: blur(2px) brightness(80%);
+        }
+    }
+}
+
+.filters-closed {
+    &#filterMenu {
+        &::after {
+            transition: none;
+            opacity: 0;
+        }
+    }
+    &#results-main {
+        height: calc(100% - var(--closed-point));
+        top: var(--closed-point);
+    }
+}
+
+.backdrop {
+    background-color: #0000;
+    position: absolute;
+    height: calc(100% - (var(--open-point) - 3%));
+    width: 100%;
+    top: calc(var(--open-point) - 3%);
+    visibility: hidden;
+    z-index: 30;
+}
+
+@keyframes open-filters {
+    0% {
+        height: calc(100% - var(--closed-point));
+        top: var(--closed-point);
+    }
+    20% {
+        height: calc(100% - (var(--closed-point) - 15px));
+        top: calc(var(--closed-point) - 15px);
+    }
+    80% {
+        height: calc(100% - (var(--open-point) + 5%));
+        top: calc(var(--open-point) + 5%);
+    }
+    100% {
+        height: calc(100% - var(--open-point));
+        top: var(--open-point);
+    }
+}
+
+@keyframes close-filters {
+    0% {
+        height: calc(100% - var(--open-point));
+        top: var(--open-point);
+    }
+    20% {
+        height: calc(100% - (var(--open-point) + 5%));
+        top: calc(var(--open-point) + 5%);
+    }
+    80% {
+        height: calc(100% - (var(--closed-point) - 15px));
+        top: calc(var(--closed-point) - 15px);
+    }
+    100% {
+        height: calc(100% - var(--closed-point));
+        top: var(--closed-point);
+    }
+}
