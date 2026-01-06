@@ -6,7 +6,7 @@ Any web code hosted here is written in my free time at my day job using a mobile
 
 ### [FH5 DB][fh5db]
 [[Source]](https://github.com/TBargman/TBargman.github.io/tree/main/FH5DB)
-What, an actual finished project? Yeah mostly! I'm a big fan of the Forza Horizon games, and with over 900 cars in Horizon 5, it'd be nice to have a way to browse through all of them and see at least the basic related stats/info. As with everything else posted here, this page looks best on mobile browsers and will probably look weird elsewhere.
+What, an actual finished project? Yeah mostly! I'm a big fan of the Forza Horizon games, and with over 900 cars in Horizon 5, it'd be nice to have a way to browse through all of them and see at least the basic related stats/info. With a few custom components included, this mainly started as a project to dynamically create a form used to filter through JSON data. A FilterForm class takes a JS object (and an array of chosen filters) and creates the entire form from it. As with everything else posted here, this page looks best on mobile browsers and will probably look weird elsewhere.
 
 ### [Garden thing][garden]
 [[Source]](https://github.com/TBargman/TBargman.github.io/tree/main/garden)
