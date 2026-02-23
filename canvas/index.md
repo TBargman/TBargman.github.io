@@ -1,6 +1,6 @@
 ### [Particle Toy](./particle-toy)
-[[Source]](https://github.com/TBargman/Particle-Toy/tree/main/src)
-Pretty colors!
+[[Source]](https://github.com/TBargman/Particle-Toy/tree/main)
+Pretty colors! Drag around the screen to make it rain. Check the top-right corner of the screen for settings to play around with.
 
 ### [Joystick](./joystick/)
 [[Source]](https://github.com/TBargman/TBargman.github.io/tree/main/canvas/joystick)
