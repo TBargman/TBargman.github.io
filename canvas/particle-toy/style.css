@@ -3,6 +3,7 @@ html {
     --btnSize: min(10vmin, 60px);
     font-family: sans-serif;
     overflow: hidden;
+    user-select: none;
 }
 
 body {
