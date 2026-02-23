@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Particles</title>
+        <link href="./style.css" rel="stylesheet">
+    </head>
+    <body>
+        
+        <canvas></canvas>
+        
+        <button type="button" id="menuBtn">≡</button>
+        
+        <div id="menu">
+            
+            <div class="header">Settings</div>
+            
+            <label for="inputPreset">Emitter Preset</label>
+            <select id="inputPreset">
+                <option value="default">Default</option>
+                <option value="flame">Flame</option>
+                <option value="coral">Coral</option>
+                <option value="ink">Invisible Ink</option>
+                <option value="rings">Rings</option>
+                <option value="custom">Custom</option>
+            </select>
+            
+            <label for="inputColors">Color Scheme</label>
+            <select id="inputColors">
+                <option value="ocean">Ocean</option>
+                <option value="fire">Fire</option>
+                <option value="emerald">Emerald</option>
+                <option value="sapphire">Sapphire</option>
+                <option value="autumn">Autumn</option>
+                <option value="smoke">Smoke</option>
+                <option value="idk">cool shit</option>
+                <option value="idk2">cool shit?</option>
+                <option value="idk3">cool shit???</option>
+                <option value="random">Random</option>
+            </select>
+            
+            <label for="inputSize">Particle Size</label>
+            <input id="inputSize" type="range" min="1" max="30" step="1" value="2">
+            <div id="valueSize" class="range-value">2px</div>
+            
+            <label for="inputPPS">Particles/sec</label>
+            <input id="inputPPS" type="range" min="10" max="15000" value="4000">
+            <div id="valuePPS" class="range-value">4000</div>
+            
+            <label for="inputMinSpeed">Min Speed</label>
+            <input id="inputMinSpeed" type="range" min="0" max="10" step="0.1" value="0">
+            <div id="valueMinSpeed" class="range-value">0</div>
+            
+            <label for="inputMaxSpeed">Max Speed</label>
+            <input id="inputMaxSpeed" type="range" min="0" max="10" step="0.1" value="3">
+            <div id="valueMaxSpeed" class="range-value">3</div>
+            
+            <label for="inputMinLife">Min Lifespan</label>
+            <input id="inputMinLife" type="range" min="0.1" max="10" step="0.1" value="0.2">
+            <div id="valueMinLife" class="range-value">0.2 sec</div>
+            
+            <label for="inputMaxLife">Max Lifespan</label>
+            <input id="inputMaxLife" type="range" min="0.1" max="10" step="0.1" value="3.0">
+            <div id="valueMaxLife" class="range-value">3 sec</div>
+            
+            <input id="inputGravityCheck" type="checkbox" checked>
+            <label for="inputGravityCheck">Gravity</label>
+            <input id="inputGravity" type="range" min="-1" max="1" step="0.01" value="0.04">
+            <div id="valueGravity" class="range-value">0.04</div>
+            
+            <input id="inputFrictionCheck" type="checkbox" checked>
+            <label for="inputFrictionCheck">X/Y Friction</label>
+            <input id="inputFriction" type="range" min="0" max="1" step="0.005" value="0.015">
+            <div id="valueFriction" class="range-value">0.015</div>
+            
+            <input id="inputPushCheck" type="checkbox" checked>
+            <label for="inputPushCheck">Push Force</label>
+            <input id="inputPush" type="range" min="-1" max="1.5" step="0.05" value="0.5">
+            <div id="valuePush" class="range-value">0.5</div>
+            
+            <input id="inputFadeCheck" type="checkbox" checked>
+            <label for="inputFadeCheck">Fade Effect</label>
+            <input id="inputFade" type="range" min="0" max="100" value="70">
+            <div id="valueFade" class="range-value">70%</div>
+            
+            <input id="inputWallsCheck" type="checkbox">
+            <label for="inputWallsCheck">Walls</label>
+            
+            <div class="separator">Performance</div>
+            
+            <span class="perf-label">Max particles:</span>
+            <span id="maxParticlesCalc">2000 (approx.)</span>
+            
+            <span class="perf-label">Particle count:</span>
+            <span id="particleCount">0</span>
+        </div>
+        
+        <script type="module" src="./main.js"></script>
+    </body>
+</html>
