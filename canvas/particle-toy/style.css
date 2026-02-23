@@ -51,7 +51,7 @@ canvas {
 #menu {
     box-sizing: border-box;
     display: grid;
-    grid-template-columns: auto 3fr 2fr;
+    grid-template-columns: auto 3fr 1fr;
     align-items: center;
     gap: 10px;
     
