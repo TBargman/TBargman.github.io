@@ -37,14 +37,14 @@ canvas {
     z-index: 99;
     
     font-size: var(--btnSize);
-    color: #ddddff1a;
+    color: #ddddff20;
     background-color: transparent;
-    border: 2px solid #ddddff1a;
+    border: 2px solid #ddddff20;
     border-radius: 4px;
     transition: color 300ms, border-color 300ms;
     &:hover {
-        border-color: #ddddff3a;
-        color: #ddddff3a;
+        border-color: #ddddff4a;
+        color: #ddddff4a;
     }
 }
 
