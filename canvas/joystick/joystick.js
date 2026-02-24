@@ -24,9 +24,7 @@ const pointer = {
     x: 0,
     y: 0,
     sx: 0, // start
-    sy: 0,
-    vx: 0, // vector
-    vy: 0
+    sy: 0
 };
 
 const joystick = {
@@ -36,7 +34,6 @@ const joystick = {
     thumby: null,
     xVal: 0,
     yVal: 0,
-    mult: 0
 };
 
 function touchStart(e) {
@@ -92,18 +89,18 @@ function update() {
     
     // joystick
     if (pointer.isDown) {
-        let dx = pointer.x - pointer.sx;
-        let dy = pointer.y - pointer.sy;
-        let dist = Math.sqrt(dx ** 2 + dy ** 2);
-        pointer.vx = dx / dist;
-        pointer.vy = dy / dist;
+        const dx = pointer.x - pointer.sx;
+        const dy = pointer.y - pointer.sy;
+        const dist = Math.sqrt(dx ** 2 + dy ** 2);
         if (dist !== 0) {
-            joystick.mult = dist > joystick.outerRadius ? 1 : dist / joystick.outerRadius;
-            joystick.xVal = dx / dist * joystick.mult;
-            joystick.yVal = dy / dist * joystick.mult;
-            joystick.thumbx = pointer.sx + pointer.vx * joystick.outerRadius * joystick.mult;
-            joystick.thumby = pointer.sy + pointer.vy * joystick.outerRadius * joystick.mult;
-            
+            const vx = dx / dist;
+            const vy = dy / dist;
+            const mult = dist > joystick.outerRadius ? 1 : dist / joystick.outerRadius;
+            joystick.xVal = vx * mult;
+            joystick.yVal = vy * mult;
+            joystick.thumbx = pointer.sx + joystick.xVal * joystick.outerRadius;
+            joystick.thumby = pointer.sy + joystick.yVal * joystick.outerRadius;
+
             player.dx = joystick.xVal * player.maxSpeed;
             player.dy = joystick.yVal * player.maxSpeed;
         }
@@ -111,13 +108,13 @@ function update() {
         player.dx /= player.friction;
         player.dy /= player.friction;
     }
-    
+
     // boundaries
     if (player.x - 1 > w) player.x = -player.size;
     if (player.x + player.size + 1 < 0) player.x = w;
     if (player.y - 1 > h) player.y = -player.size;
     if (player.y + player.size + 1 < 0) player.y = h;
-    
+
     // apply
     player.x += player.dx;
     player.y += player.dy;
@@ -129,12 +126,12 @@ function render() {
     // background
     ctx.fillStyle = "#25313a";
     ctx.fillRect(0, 0, w, h);
-    
+
     // player
     ctx.fillStyle = "#f00";
     ctx.beginPath();
     ctx.fillRect(player.x, player.y, player.size, player.size);
-    
+
     // joystick
     if (pointer.isDown) {
         ctx.fillStyle = "#ffffff0f";
@@ -155,7 +152,7 @@ function render() {
         ctx.arc(joystick.thumbx, joystick.thumby, joystick.thumbRadius, 0, tau);
         ctx.fill();
     }
-    
+
     ctx.fillStyle = "#ffffff";
     ctx.fillText("Joystick values:", 10, h - 42);
     ctx.fillText(`x: ${joystick.xVal.toFixed(3)}`, 10, h - 26);
