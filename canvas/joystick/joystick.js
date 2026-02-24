@@ -1,32 +1,41 @@
 "use strict";
 
-const canvas = document.querySelector("#canvas");
+const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 const dpr = window.devicePixelRatio || 1;
 let w = window.innerWidth - 48;
 let h = window.innerHeight - 48;
-let imageData, data;
-const test = document.querySelector("#test");
 
-function trim(input, n) {
-    const e = 10 ** n;
-    return Math.round(input * e) / e;
-}
+const tau = Math.PI * 2;
+
+const player = {
+    // just a box lol
+    size: 40,
+    x: 200,
+    y: 200,
+    dx: 0,
+    dy: 0,
+    maxSpeed: 6,
+    friction: 1.1
+};
 
 const pointer = {
     isDown: false,
     x: 0,
     y: 0,
-    sx: 0,
-    sy: 0
+    sx: 0, // start
+    sy: 0,
+    vx: 0, // vector
+    vy: 0
 };
 
 const joystick = {
-    outerRadius: 48,
-    thumbRadius: 20,
-    xVal: null,
-    yVal: null,
-    angle: 0,
+    outerRadius: 60,
+    thumbRadius: 16,
+    thumbx: null,
+    thumby: null,
+    xVal: 0,
+    yVal: 0,
     mult: 0
 };
 
@@ -38,6 +47,8 @@ function touchStart(e) {
     pointer.y = oy;
     pointer.sx = ox;
     pointer.sy = oy;
+    joystick.thumbx = ox;
+    joystick.thumby = oy;
     joystick.xVal = 0;
     joystick.yVal = 0;
     pointer.isDown = true;
@@ -51,18 +62,8 @@ function touchMove(e) {
 
 function touchEnd(e) {
     pointer.isDown = false;
-}
-
-function color(r, g, b, a) {
-    return {r: r, g: g, b: b, a: a ? a : 255};
-}
-
-function setPixel(x, y, color) {
-    const px = (y * w + x) * 4;
-    data[px] = color.r;
-    data[px + 1] = color.g;
-    data[px + 2] = color.b;
-    data[px + 3] = color.a;
+    joystick.xVal = 0;
+    joystick.yVal = 0;
 }
 
 function initCanvas() {
@@ -72,16 +73,9 @@ function initCanvas() {
     canvas.style.left = window.innerWidth / 2 - w / 2 + "px";
     canvas.style.width = w + "px";
     canvas.style.height = h + "px";
-
-    //w *= dpr;
-    //h *= dpr;
     canvas.width = w * dpr;
     canvas.height = h * dpr;
     ctx.scale(dpr, dpr);
-    /**/
-
-    imageData = ctx.createImageData(w, h);
-    data = imageData.data;
 
     ctx.fillStyle = "#ffffff66";
     ctx.strokeStyle = "#ffffff";
@@ -95,18 +89,38 @@ function initCanvas() {
 }
 
 function update() {
+    
+    // joystick
     if (pointer.isDown) {
         let dx = pointer.x - pointer.sx;
         let dy = pointer.y - pointer.sy;
         let dist = Math.sqrt(dx ** 2 + dy ** 2);
-        
+        pointer.vx = dx / dist;
+        pointer.vy = dy / dist;
         if (dist !== 0) {
-            test.textContent = `dx: ${trim(dx, 1)} dy: ${trim(dy, 1)}`;
-            joystick.xVal = Math.cos(dy / dist);
-            joystick.yVal = Math.sin(dx / dist);
             joystick.mult = dist > joystick.outerRadius ? 1 : dist / joystick.outerRadius;
+            joystick.xVal = dx / dist * joystick.mult;
+            joystick.yVal = dy / dist * joystick.mult;
+            joystick.thumbx = pointer.sx + pointer.vx * joystick.outerRadius * joystick.mult;
+            joystick.thumby = pointer.sy + pointer.vy * joystick.outerRadius * joystick.mult;
+            
+            player.dx = joystick.xVal * player.maxSpeed;
+            player.dy = joystick.yVal * player.maxSpeed;
         }
+    } else {
+        player.dx /= player.friction;
+        player.dy /= player.friction;
     }
+    
+    // boundaries
+    if (player.x - 1 > w) player.x = -player.size;
+    if (player.x + player.size + 1 < 0) player.x = w;
+    if (player.y - 1 > h) player.y = -player.size;
+    if (player.y + player.size + 1 < 0) player.y = h;
+    
+    // apply
+    player.x += player.dx;
+    player.y += player.dy;
 }
 
 function render() {
@@ -115,25 +129,37 @@ function render() {
     // background
     ctx.fillStyle = "#25313a";
     ctx.fillRect(0, 0, w, h);
-
+    
+    // player
+    ctx.fillStyle = "#f00";
+    ctx.beginPath();
+    ctx.fillRect(player.x, player.y, player.size, player.size);
+    
+    // joystick
     if (pointer.isDown) {
-        // outer circle
         ctx.fillStyle = "#ffffff0f";
+        ctx.strokeStyle = "#ffffff6f";
+        // outer circle
         ctx.beginPath();
-        ctx.arc(pointer.sx, pointer.sy, joystick.outerRadius, 0, 2 * Math.PI);
+        ctx.arc(pointer.sx, pointer.sy, joystick.outerRadius, 0, 2 * tau);
         ctx.fill();
         ctx.stroke();
 
-        // inner circle
+        // thumb circle
+        ctx.fillStyle = "#fff8";
         ctx.beginPath();
         ctx.moveTo(pointer.sx, pointer.sy);
-        ctx.lineTo(pointer.x, pointer.y);
+        ctx.lineTo(joystick.thumbx, joystick.thumby);
         ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(joystick.thumbx, joystick.thumby, joystick.thumbRadius, 0, tau);
+        ctx.fill();
     }
-
+    
     ctx.fillStyle = "#ffffff";
-    ctx.fillText(`${trim(joystick.mult, 3)}`, 10, h - 26);
-    ctx.fillText(`${trim(joystick.xVal, 3)}, ${trim(joystick.yVal, 3)}`, 10, h - 10);
+    ctx.fillText("Joystick values:", 10, h - 42);
+    ctx.fillText(`x: ${joystick.xVal.toFixed(3)}`, 10, h - 26);
+    ctx.fillText(`y: ${joystick.yVal.toFixed(3)}`, 10, h - 10);
     requestAnimationFrame(render);
 }
 
