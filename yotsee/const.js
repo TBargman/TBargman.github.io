@@ -12,7 +12,7 @@ export const strings = {
 
 // setup screen
 export const inputsHeight = 30;
-export const fontScale = 0.75;
+export const fontScale = 0.5;
 export const playerColors = [
     "#ed1b1b",
     "#e7830e",
