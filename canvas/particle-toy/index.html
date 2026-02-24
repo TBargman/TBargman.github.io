@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Particle Toy</title>
+        <title>Particles</title>
         <link href="./style.css" rel="stylesheet">
     </head>
     <body>
@@ -33,10 +33,21 @@
                 <option value="sapphire">Sapphire</option>
                 <option value="autumn">Autumn</option>
                 <option value="smoke">Smoke</option>
-                <option value="idk">Palette X</option>
-                <option value="idk2">Palette Y</option>
-                <option value="idk3">Palette Z</option>
+                <option value="idk">cool shit</option>
+                <option value="idk2">cool shit?</option>
+                <option value="idk3">cool shit???</option>
                 <option value="random">Random</option>
+            </select>
+            
+            <label for="inputBlendMode">Blend Mode</label>
+            <select id="inputBlendMode" value="source-over">
+                <option disabled>(!) = SLOW</option>
+                <option value="source-over">Normal</option>
+                <option value="screen">Screen</option>
+                <option value="lighter">Lighter</option>
+                <option value="overlay">Overlay (!)</option>
+                <option value="lighten">Lighten (!)</option>
+                <option value="color-dodge">Color Dodge (!)</option>
             </select>
             
             <label for="inputSize">Particle Size</label>
@@ -82,6 +93,11 @@
             <label for="inputFadeCheck">Fade Effect</label>
             <input id="inputFade" type="range" min="0" max="100" value="70">
             <div id="valueFade" class="range-value">70%</div>
+            
+            <input id="inputBlurCheck" type="checkbox">
+            <label for="inputBlurCheck">Blur</label>
+            <input id="inputBlur" type="range" min="0" max="30" value="4">
+            <div id="valueBlur" class="range-value">4px</div>
             
             <input id="inputWallsCheck" type="checkbox">
             <label for="inputWallsCheck">Walls</label>
