@@ -1,8 +1,6 @@
 const frictionLabel = document.querySelector("#inputFrictionCheck + label");
 
 export const Config = {
-    presetName: "default",
-    usingPreset: true,
     selectedColors: "ocean",
     blendMode: "source-over",
     particleSize: 2,
@@ -26,7 +24,6 @@ export const Config = {
     blurEnabled: false,
     applyPreset: function(preset) {
         Config.presetName = preset;
-        Config.usingPreset = true;
         for (let prop in Presets[preset]) this[prop] = Presets[preset][prop];
         
         // update menu
@@ -44,9 +41,9 @@ export const Config = {
                 input.display.textContent = val;
             }
         }
+        Menu.performance.maxParticles.textContent = Menu.performance.getMaxParticles();
     },
     setCustom: function() {
-        this.usingPreset = false;
         Menu.presetInput.value = "custom";
         for (let propName in Presets.custom) {
             Presets.custom[propName] = Config[propName];
@@ -178,7 +175,13 @@ export const Menu = {
     },
     performance: {
         maxParticles: document.querySelector("#maxParticlesCalc"),
-        particleCount: document.querySelector("#particleCount")
+        particleCount: document.querySelector("#particleCount"),
+        getMaxParticles: function() {
+            let avg;
+            if (Config.minLife > Config.maxLife) avg = Config.minLife;
+            else avg = (Config.maxLife + Config.minLife) / 2;
+            return Math.round((avg * 0.001) * (1000 / Config.spawnDelay));
+        }
     }
 };
 
