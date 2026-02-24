@@ -3,6 +3,7 @@ const frictionLabel = document.querySelector("#inputFrictionCheck + label");
 export const Config = {
     selectedColors: "ocean",
     blendMode: "source-over",
+    emitterSize: 1,
     particleSize: 2,
     spawnDelay: 0.25,
     minLife: 100,
@@ -41,7 +42,7 @@ export const Config = {
                 input.display.textContent = val;
             }
         }
-        Menu.performance.maxParticles.textContent = Menu.performance.getMaxParticles();
+        Menu.performance.maxParticles.textContent = `${Menu.performance.getMaxParticles()} (approx.)`;
     },
     setCustom: function() {
         Menu.presetInput.value = "custom";
@@ -61,6 +62,12 @@ export const Menu = {
         blendMode: {
             type: "select",
             element: document.querySelector("#inputBlendMode")
+        },
+        emitterSize: {
+            type: "range",
+            element: document.querySelector("#inputEmitterSize"),
+            display: document.querySelector("#valueEmitterSize"),
+            unit: "px"
         },
         particleSize: {
             type: "range",
@@ -244,6 +251,7 @@ const Presets = {
     default: {
         selectedColors: "ocean",
         blendMode: "source-over",
+        emitterSize: 1,
         particleSize: 2,
         spawnDelay: 0.25,
         minLife: 100,
@@ -267,6 +275,7 @@ const Presets = {
     flame: {
         selectedColors: "fire",
         blendMode: "lighter",
+        emitterSize: 1,
         particleSize: 2,
         spawnDelay: 0.16667,
         minLife: 100,
@@ -290,6 +299,7 @@ const Presets = {
     coral: {
         selectedColors: "autumn",
         blendMode: "source-over",
+        emitterSize: 1,
         particleSize: 4,
         spawnDelay: 0.4,
         minLife: 100,
@@ -313,6 +323,7 @@ const Presets = {
     ink: {
         selectedColors: "ocean",
         blendMode: "source-over",
+        emitterSize: 1,
         particleSize: 2,
         spawnDelay: 0.125,
         minLife: 1500,
@@ -320,7 +331,7 @@ const Presets = {
         minSpeed: 0,
         maxSpeed: 10,
         gravity: -0.03,
-        friction: 2,
+        friction: 1.6,
         pushForce: 0.5,
         magnet: 0,
         fadeEffectAlpha: 0.4,
@@ -336,6 +347,7 @@ const Presets = {
     rings: {
         selectedColors: "ocean",
         blendMode: "source-over",
+        emitterSize: 1,
         particleSize: 2,
         spawnDelay: 0.06667,
         minLife: 100,
@@ -359,6 +371,7 @@ const Presets = {
     steam: {
         selectedColors: "smoke",
         blendMode: "screen",
+        emitterSize: 1,
         particleSize: 2,
         spawnDelay: 0.55556,
         minLife: 1500,
@@ -382,6 +395,7 @@ const Presets = {
     custom: {
         selectedColors: "ocean",
         blendMode: "source-over",
+        emitterSize: 1,
         particleSize: 2,
         spawnDelay: 0.25,
         minLife: 100,
