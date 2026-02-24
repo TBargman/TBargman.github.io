@@ -263,7 +263,7 @@ const Presets = {
     },
     flame: {
         selectedColors: "fire",
-        blendMode: "source-over",
+        blendMode: "lighter",
         particleSize: 2,
         spawnDelay: 0.16667,
         minLife: 100,
@@ -274,15 +274,15 @@ const Presets = {
         friction: 1.06,
         pushForce: 0.5,
         magnet: 0,
-        fadeEffectAlpha: 0.3,
-        blur: 4,
+        fadeEffectAlpha: 0.25,
+        blur: 1,
         gravityEnabled: true,
         frictionEnabled: true,
         pushEnabled: false,
         magnetEnabled: false,
         wallsEnabled: false,
         fadeEffect: true,
-        blurEnabled: false
+        blurEnabled: true
     },
     coral: {
         selectedColors: "autumn",
