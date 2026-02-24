@@ -6,6 +6,7 @@ const isMobile = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 const canvas = document.querySelector("canvas");
 const menuBtn = document.querySelector("#menuBtn");
 const menuEl = document.querySelector("#menu");
+const clearBtn = document.querySelector("#clearBtn");
 
 const ctx = canvas.getContext("2d");
 const dpr = window.devicePixelRatio;
@@ -45,8 +46,10 @@ function genColor(color) {
 
 class Particle {
     constructor(clock) {
-        this.x = pointer.x;
-        this.y = pointer.y;
+        const ex = Math.random() * (coinToss() ? 1 : -1);
+        const ey = Math.sqrt(1 - ex * ex) * (coinToss() ? 1 : -1);
+        this.x = pointer.x + ex * Config.emitterSize * Math.random();
+        this.y = pointer.y + ey * Config.emitterSize * Math.random();
         
         const speed = Math.random() * (Config.maxSpeed - Config.minSpeed) + Config.minSpeed;
         const ux = Math.random();
@@ -296,6 +299,8 @@ if (isMobile) {
 }
 
 menuBtn.addEventListener("click", toggleMenu);
+
+clearBtn.addEventListener("click", () => { particles = []; });
 
 Menu.presetInput.addEventListener("change", function() {
     Config.applyPreset(this.value);
