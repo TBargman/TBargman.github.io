@@ -4,6 +4,7 @@ export const Config = {
     presetName: "default",
     usingPreset: true,
     selectedColors: "ocean",
+    blendMode: "source-over",
     particleSize: 2,
     spawnDelay: 0.25,
     minLife: 100,
@@ -15,12 +16,14 @@ export const Config = {
     pushForce: 0.5,
     magnet: 0,
     fadeEffectAlpha: 0.3,
+    blur: 4,
     gravityEnabled: true,
     frictionEnabled: true,
     pushEnabled: true,
     magnetEnabled: false,
     wallsEnabled: false,
     fadeEffect: true,
+    blurEnabled: false,
     applyPreset: function(preset) {
         Config.presetName = preset;
         Config.usingPreset = true;
@@ -56,8 +59,11 @@ export const Menu = {
     inputs: {
         selectedColors: {
             type: "select",
-            element: document.querySelector("#inputColors"),
-            setValue: (val) => {Config.selectedColors = val}
+            element: document.querySelector("#inputColors")
+        },
+        blendMode: {
+            type: "select",
+            element: document.querySelector("#inputBlendMode")
         },
         particleSize: {
             type: "range",
@@ -134,6 +140,12 @@ export const Menu = {
             setValue: (val) => {Config.fadeEffectAlpha = -0.01 * (val - 100)},
             getValue: () => -100 * (Config.fadeEffectAlpha - 1)
         },
+        blur: {
+            type: "range",
+            element: document.querySelector("#inputBlur"),
+            display: document.querySelector("#valueBlur"),
+            unit: "px"
+        },
         gravityEnabled: {
             type: "checkbox",
             element: document.querySelector("#inputGravityCheck"),
@@ -158,6 +170,10 @@ export const Menu = {
         fadeEffect: {
             type: "checkbox",
             element: document.querySelector("#inputFadeCheck")
+        },
+        blurEnabled: {
+            type: "checkbox",
+            element: document.querySelector("#inputBlurCheck")
         }
     },
     performance: {
@@ -224,6 +240,7 @@ export const ColorSchemes = {
 const Presets = {
     default: {
         selectedColors: "ocean",
+        blendMode: "source-over",
         particleSize: 2,
         spawnDelay: 0.25,
         minLife: 100,
@@ -235,15 +252,18 @@ const Presets = {
         pushForce: 0.5,
         magnet: 0,
         fadeEffectAlpha: 0.3,
+        blur: 4,
         gravityEnabled: false,
         frictionEnabled: true,
         pushEnabled: true,
         magnetEnabled: false,
         wallsEnabled: false,
-        fadeEffect: true
+        fadeEffect: true,
+        blurEnabled: false
     },
     flame: {
         selectedColors: "fire",
+        blendMode: "source-over",
         particleSize: 2,
         spawnDelay: 0.16667,
         minLife: 100,
@@ -255,15 +275,18 @@ const Presets = {
         pushForce: 0.5,
         magnet: 0,
         fadeEffectAlpha: 0.3,
+        blur: 4,
         gravityEnabled: true,
         frictionEnabled: true,
         pushEnabled: false,
         magnetEnabled: false,
         wallsEnabled: false,
-        fadeEffect: true
+        fadeEffect: true,
+        blurEnabled: false
     },
     coral: {
         selectedColors: "autumn",
+        blendMode: "source-over",
         particleSize: 4,
         spawnDelay: 0.4,
         minLife: 100,
@@ -275,15 +298,18 @@ const Presets = {
         magnet: 0,
         pushForce: 0.5,
         fadeEffectAlpha: 0.07,
+        blur: 4,
         gravityEnabled: true,
         frictionEnabled: false,
         pushEnabled: true,
         magnetEnabled: false,
         wallsEnabled: false,
-        fadeEffect: true
+        fadeEffect: true,
+        blurEnabled: false
     },
     ink: {
         selectedColors: "ocean",
+        blendMode: "source-over",
         particleSize: 2,
         spawnDelay: 0.125,
         minLife: 1500,
@@ -295,15 +321,18 @@ const Presets = {
         pushForce: 0.5,
         magnet: 0,
         fadeEffectAlpha: 0.4,
+        blur: 4,
         gravityEnabled: false,
         frictionEnabled: true,
         pushEnabled: false,
         magnetEnabled: false,
         wallsEnabled: false,
-        fadeEffect: false
+        fadeEffect: false,
+        blurEnabled: false
     },
     rings: {
         selectedColors: "ocean",
+        blendMode: "source-over",
         particleSize: 2,
         spawnDelay: 0.06667,
         minLife: 100,
@@ -315,15 +344,18 @@ const Presets = {
         pushForce: 0.5,
         magnet: 0,
         fadeEffectAlpha: 0.3,
+        blur: 4,
         gravityEnabled: false,
         frictionEnabled: true,
         pushEnabled: false,
         magnetEnabled: false,
         wallsEnabled: false,
-        fadeEffect: false
+        fadeEffect: false,
+        blurEnabled: false
     },
     custom: {
         selectedColors: "ocean",
+        blendMode: "source-over",
         particleSize: 2,
         spawnDelay: 0.25,
         minLife: 100,
@@ -335,11 +367,13 @@ const Presets = {
         pushForce: 0.5,
         magnet: 0,
         fadeEffectAlpha: 0.3,
+        blur: 4,
         gravityEnabled: false,
         frictionEnabled: true,
         pushEnabled: true,
         magnetEnabled: false,
         wallsEnabled: false,
-        fadeEffect: true
+        fadeEffect: true,
+        blurEnabled: false
     }
 };
