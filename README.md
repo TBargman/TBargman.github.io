@@ -4,16 +4,16 @@ Any web code hosted here is written in my free time at my day job using a mobile
 
 
 
+### [Canvas Shenanigans][canvas]
+My current obsession is drawing things programmatically, and the HTML5 canvas is fun to play around with. 
+
 ### [FH5 DB][fh5db]
 [[Source]](https://github.com/TBargman/TBargman.github.io/tree/main/FH5DB)
-What, an actual finished project? Yeah mostly! I'm a big fan of the Forza Horizon games, and with over 900 cars in Horizon 5, it'd be nice to have a way to browse through all of them and see at least the basic related stats/info. With a few custom components included, this mainly started as a project to dynamically create a form used to filter through JSON data. A FilterForm class takes a JS object (and an array of chosen filters) and creates the entire form from it. Comes complete with fancy animations and dynamically loading results as you scroll down the page. As with everything else posted here, this page looks best on mobile browsers and will probably look weird elsewhere.
+Wait, an actual finished project? Yeah mostly! I'm a big fan of the Forza Horizon games, and with over 900 cars in Horizon 5, it'd be nice to have a way to browse through all of them and see at least the basic related stats/info. With a few custom components included, this mainly started as a project to dynamically create a form used to filter through JSON data. A FilterForm class takes a JS object (and an array of chosen filters) and creates the entire form from it. Comes complete with fancy animations, custom components and dynamically loading results as you scroll down the page. As with everything else posted here, this page looks best on mobile browsers and will probably look weird elsewhere.
 
 ### ~~[Garden thing][garden]~~
 [[Source]](https://github.com/TBargman/TBargman.github.io/tree/main/garden)
 My first "big" project I started as a way to get my feet wet with Javascript. It was very early in my journey and so, inevitably, the code became a wild and highly unorganized spaghetti mess 🤢 I don't see myself going back to this without starting over from scratch.
-
-### [Canvas Shenanigans][canvas]
-My current obsession is drawing things programmatically, and the HTML5 canvas is fun to play around with. 
 
 ### [Yotsee][yah]
 [[Source]](https://github.com/TBargman/TBargman.github.io/tree/main/yotsee)
