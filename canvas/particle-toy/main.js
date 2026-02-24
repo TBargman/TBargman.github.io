@@ -23,8 +23,6 @@ const tau = Math.PI * 2;
 
 let particles = [];
 let menuOpen = false;
-let usingPreset = true;
-let selectedPreset = "default";
 
 
 function toggleMenu() {
@@ -328,11 +326,7 @@ for (let propName in Menu.inputs) {
                 input.display.textContent = this.value;
                 if ("unit" in input) input.display.textContent += input.unit;
                 if (propName === "spawnDelay" || propName === "maxLife" || propName === "minLife") {
-                    let avg;
-                    if (Config.minLife > Config.maxLife) avg = Config.minLife;
-                    else avg = (Config.maxLife + Config.minLife) / 2;
-                    const n = Math.round((avg * 0.001) * (1000 / Config.spawnDelay));
-                    Menu.performance.maxParticles.textContent = `${n} (approx.)`;
+                    Menu.performance.maxParticles.textContent = `${Menu.performance.getMaxParticles()} (approx.)`;
                 }
                 break;
         }
