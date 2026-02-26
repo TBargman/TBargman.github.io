@@ -38,7 +38,7 @@ function toggleMenu() {
 
 function genColor(color) {
     if (color !== "random") return choice(ColorSchemes[color]);
-    return rndHexColor();
+    return rndColor();
 }
 
 
@@ -66,19 +66,19 @@ class Particle {
         this.lifespan = Math.random() * (Config.maxLife - Config.minLife) + Config.minLife;
         this.birthday = clock;
         this.elapsed = 0;
-        this.inside = true;
+        this.onscreen = true;
     }
     update(clock) {
         this.elapsed = clock - this.birthday;
         if (this.x - this.radius < 0) {
-            if (!Config.wallsEnabled) this.inside = false;
+            if (!Config.wallsEnabled) this.onscreen = false;
             else {
                 this.x = this.radius;
                 this.dx = -this.dx;
             }
         }
         if (this.x + this.radius > w) {
-            if (!Config.wallsEnabled) this.inside = false;
+            if (!Config.wallsEnabled) this.onscreen = false;
             else {
                 this.x = w - this.radius;
                 this.dx = -this.dx;
@@ -111,9 +111,8 @@ class Particle {
         this.y += this.dy;
     }
     draw() {
-        const lifetime = (this.lifespan - this.elapsed) / this.lifespan;
-        const alpha = decToHex255(Math.floor(lifetime * 255));
-        ctx.fillStyle = this.color + alpha;
+        const alpha = (this.lifespan - this.elapsed) / this.lifespan;
+        ctx.fillStyle = `rgba(${this.color},${alpha})`;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, tau);
         ctx.fill();
@@ -165,9 +164,23 @@ function handleUp(e) {
 }
 
 
-////// ENGINE //////
+////// UTILITY FUNCS //////
 
-// Utility funcs
+function setCanvasSize() {
+    const mult = quality !== "oversample" ? 1 : oversampleMult;
+    h = window.innerHeight * mult;
+    w = window.innerWidth * mult;
+    canvas.height = h;
+    canvas.width = w;
+    if (quality !== "default") {
+        const mdpr = dpr * mult;
+        canvas.height *= mdpr;
+        canvas.width *= mdpr;
+        ctx.scale(mdpr, mdpr);
+        canvas.style.height = window.innerHeight + "px";
+        canvas.style.width = window.innerWidth + "px";
+    }
+}
 
 function coinToss() {
     return Math.round(Math.random());
@@ -177,11 +190,11 @@ function choice(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function rndHexColor() {
-    const h = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
-    let st = "#";
-    for (let i = 0; i < 6; i++) st += choice(h);
-    return st;
+function rndColor() {
+    const r = (Math.random() * 255) | 0;
+    const g = (Math.random() * 255) | 0;
+    const b = (Math.random() * 255) | 0;
+    return `${r},${g},${b}`;
 }
 
 function clampPointerSpeed(min, max) {
@@ -208,7 +221,8 @@ function decToHex255(n) {
     return st;
 }
 
-// Physics + Rendering
+
+////// ENGINE //////
 
 function update() {
     
@@ -234,7 +248,7 @@ function update() {
     }
     
     particles.forEach(p => { p.update(clock); });
-    particles = particles.filter(p => p.elapsed < p.lifespan && p.inside);
+    particles = particles.filter(p => p.elapsed < p.lifespan && p.onscreen);
     Menu.performance.particleCount.textContent = particles.length;
 }
 
@@ -268,25 +282,12 @@ function run(ts) {
 
 ////// INIT //////
 
-// canvas
-const mult = quality !== "oversample" ? 1 : oversampleMult;
-h = window.innerHeight * mult;
-w = window.innerWidth * mult;
-canvas.height = h;
-canvas.width = w;
-if (quality !== "default") {
-    const mdpr = dpr * mult;
-    canvas.height *= mdpr;
-    canvas.width *= mdpr;
-    ctx.scale(mdpr, mdpr);
-    canvas.style.height = window.innerHeight + "px";
-    canvas.style.width = window.innerWidth + "px";
-}
-
+setCanvasSize();
 Config.applyPreset("default");
 
+// Event Listeners
 
-////// EVENT LISTENERS //////
+window.addEventListener("resize", setCanvasSize);
 
 if (isMobile) {
     canvas.addEventListener("touchstart", handleDown);
@@ -299,11 +300,20 @@ if (isMobile) {
 }
 
 menuBtn.addEventListener("click", toggleMenu);
-
 clearBtn.addEventListener("click", () => { particles = []; });
 
 Menu.presetInput.addEventListener("change", function() {
     Config.applyPreset(this.value);
+});
+
+// "walls" btn not in Menu obj:
+// turning walls on should remove particles outside of screen
+document.querySelector("#inputWallsCheck").addEventListener("change", function() {
+    if (this.checked == true) particles = particles.filter(
+        p => p.onscreen && 
+        p.y - p.radius > 0 && 
+        p.y + p.radius < h);
+    Config.wallsEnabled = this.checked;
 });
 
 for (let propName in Menu.inputs) {
