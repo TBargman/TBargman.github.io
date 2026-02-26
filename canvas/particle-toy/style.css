@@ -64,6 +64,8 @@ canvas {
 
     width: min(100%, 480px);
     height: auto;
+    max-height: 100vh;
+    overflow: scroll;
     border: solid #ddf5;
     border-radius: 4px 4px 5px 5px;
     padding: calc(var(--btnSize) + 16px) 16px 16px;
@@ -131,10 +133,11 @@ input[type="checkbox"]:checked + label {
     grid-column: 1 / 2;
     text-align: right;
 }
+
 #clearBtn {
     text-align: center;
-}
-#clearBtn:active {
-    color: black;
-    background-color: white;
+    &:active {
+        color: black;
+        background-color: white;
+    }
 }

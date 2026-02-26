@@ -204,23 +204,6 @@ function clampPointerSpeed(min, max) {
     if (pointer.dy > max) pointer.dy = max;
 }
 
-function decToHex255(n) {
-    const letters = {
-        10: "a",
-        11: "b",
-        12: "c",
-        13: "d",
-        14: "e",
-        15: "f"
-    };
-    let st;
-    const a = Math.floor(n / 16);
-    const b = n % 16;
-    st = a < 10 ? String(a) : letters[a];
-    st += b < 10 ? String(b) : letters[b];
-    return st;
-}
-
 
 ////// ENGINE //////
 
