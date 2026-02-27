@@ -2,7 +2,7 @@
 
 import {Config, Menu, ColorSchemes} from "./config.js";
 
-const isMobile = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+let isMobile = false;
 const canvas = document.querySelector("canvas");
 const menuBtn = document.querySelector("#menuBtn");
 const menuEl = document.querySelector("#menu");
@@ -136,6 +136,7 @@ const pointer = {
 };
 
 function handleDown(e) {
+    isMobile = "touches" in e;
     pointer.isDown = true;
     pointer.downAt = performance.now();
     pointer.lastTs = pointer.downAt;
@@ -148,6 +149,7 @@ function handleDown(e) {
 }
 
 function handleMove(e) {
+    isMobile = "touches" in e;
     if (isMobile) {
         pointer.x = e.touches[0].clientX;
         pointer.y = e.touches[0].clientY;
@@ -272,15 +274,12 @@ Config.applyPreset("default");
 
 window.addEventListener("resize", setCanvasSize);
 
-if (isMobile) {
-    canvas.addEventListener("touchstart", handleDown);
-    canvas.addEventListener("touchmove", handleMove);
-    canvas.addEventListener("touchend", handleUp);
-} else {
-    canvas.addEventListener("pointerdown", handleDown);
-    canvas.addEventListener("pointermove", handleMove);
-    canvas.addEventListener("pointerup", handleUp);
-}
+canvas.addEventListener("touchstart", handleDown);
+canvas.addEventListener("touchmove", handleMove);
+canvas.addEventListener("touchend", handleUp);
+canvas.addEventListener("pointerdown", handleDown);
+canvas.addEventListener("pointermove", handleMove);
+canvas.addEventListener("pointerup", handleUp);
 
 menuBtn.addEventListener("click", toggleMenu);
 clearBtn.addEventListener("click", () => { particles = []; });
