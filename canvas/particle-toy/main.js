@@ -2,7 +2,6 @@
 
 import {Config, Menu, ColorSchemes} from "./config.js";
 
-let isMobile = false;
 const canvas = document.querySelector("canvas");
 const menuBtn = document.querySelector("#menuBtn");
 const menuEl = document.querySelector("#menu");
@@ -25,7 +24,6 @@ const tau = Math.PI * 2;
 let particles = [];
 let menuOpen = false;
 
-
 function toggleMenu() {
     if (menuOpen) {
         menuOpen = false;
@@ -36,21 +34,24 @@ function toggleMenu() {
     }
 }
 
-function genColor(color) {
-    if (color !== "random") return choice(ColorSchemes[color]);
-    return rndColor();
-}
-
 
 ////// PARTICLE CLASS //////
 
+const pTiming = {
+    lastTs: 0,
+    acc: 0
+};
+
 class Particle {
     constructor(clock) {
+        
+        // start position
         const ex = Math.random() * (coinToss() ? 1 : -1);
         const ey = Math.sqrt(1 - ex * ex) * (coinToss() ? 1 : -1);
         this.x = pointer.x + ex * Config.emitterSize * Math.random();
         this.y = pointer.y + ey * Config.emitterSize * Math.random();
         
+        // move vector
         const speed = Math.random() * (Config.maxSpeed - Config.minSpeed) + Config.minSpeed;
         const ux = Math.random();
         const uy = Math.sqrt(1 - ux * ux);
@@ -70,6 +71,8 @@ class Particle {
     }
     update(clock) {
         this.elapsed = clock - this.birthday;
+        
+        // wall checks
         if (this.x - this.radius < 0) {
             if (!Config.wallsEnabled) this.onscreen = false;
             else {
@@ -96,17 +99,20 @@ class Particle {
             }
         }
         
+        // forces
         if (Config.frictionEnabled) this.dx /= Config.friction;
         if (Config.gravity !== 0 && Config.gravityEnabled) this.dy += Config.gravity;
         else if (Config.frictionEnabled) this.dy /= Config.friction;
-        
+        /* manget (not accurate)
         if (pointer.isDown && Config.magnetEnabled && Config.magnet > 0) {
             if (this.x < pointer.x) this.dx += Config.magnet;
             if (this.x > pointer.x) this.dx -= Config.magnet;
             if (this.y < pointer.y) this.dy += Config.magnet;
             if (this.y > pointer.y) this.dy -= Config.magnet;
         }
+        */
         
+        // apply vector
         this.x += this.dx;
         this.y += this.dy;
     }
@@ -124,9 +130,6 @@ class Particle {
 
 const pointer = {
     isDown: false,
-    downAt: 0,
-    lastTs: 0,
-    acc: 0,
     x: null,
     y: null,
     px: null, // previous
@@ -136,12 +139,11 @@ const pointer = {
 };
 
 function handleDown(e) {
-    isMobile = "touches" in e;
+    pTiming.lastTs = performance.now();
+    pTiming.acc = 0;
     pointer.isDown = true;
-    pointer.downAt = performance.now();
-    pointer.lastTs = pointer.downAt;
-    pointer.acc = 0;
-    const p = isMobile ? e.touches[0] : e;
+    
+    const p = "touches" in e ? e.touches[0] : e;
     pointer.x = p.clientX;
     pointer.y = p.clientY;
     pointer.px = pointer.x;
@@ -149,7 +151,7 @@ function handleDown(e) {
 }
 
 function handleMove(e) {
-    isMobile = "touches" in e;
+    const isMobile = "touches" in e;
     if (isMobile) {
         pointer.x = e.touches[0].clientX;
         pointer.y = e.touches[0].clientY;
@@ -199,6 +201,11 @@ function rndColor() {
     return `${r},${g},${b}`;
 }
 
+function genColor(color) {
+    if (color !== "random") return choice(ColorSchemes[color]);
+    return rndColor();
+}
+
 function clampPointerSpeed(min, max) {
     if (pointer.dx < min) pointer.dx = min;
     if (pointer.dy < min) pointer.dy = min;
@@ -211,6 +218,7 @@ function clampPointerSpeed(min, max) {
 
 function update() {
     
+    // particle generation timing
     const clock = performance.now();
     
     // pointer
@@ -219,16 +227,17 @@ function update() {
         pointer.dy = pointer.y - pointer.py;
         pointer.px = pointer.x;
         pointer.py = pointer.y;
+        // speed limit for push force
         clampPointerSpeed(-10, 10);
         
-        pointer.acc += clock - pointer.lastTs;
-        pointer.lastTs = clock;
-        const n = Math.floor(pointer.acc / Config.spawnDelay);
-        if (n > 0) {
-            pointer.acc -= Config.spawnDelay * n;
-            for (let i = 0; i < n; i++) {
-                particles.push(new Particle(clock));
-            }
+        // generate particles until caught up to update timestamp
+        pTiming.acc += clock - pTiming.lastTs;
+        pTiming.lastTs = clock;
+        let n = Math.floor(pTiming.acc / Config.spawnDelay);
+        while (n > 0) {
+            pTiming.acc -= Config.spawnDelay;
+            particles.push(new Particle(clock));
+            n--;
         }
     }
     
@@ -244,9 +253,7 @@ function draw() {
     canvas.style.filter = `blur(${Config.blurEnabled ? Config.blur : 0}px)`;
     
     ctx.globalCompositeOperation = Config.blendMode;
-    particles.forEach(p => {
-        p.draw();
-    });
+    particles.forEach(p => { p.draw(); });
 }
 
 function run(ts) {
@@ -254,7 +261,8 @@ function run(ts) {
     const dTime = ts - lastTs;
     acc += dTime;
     lastTs = ts;
-
+    
+    // run updates until caught up to main clock
     while (acc >= targetFT) {
         update();
         acc -= targetFT;
@@ -288,21 +296,21 @@ Menu.presetInput.addEventListener("change", function() {
     Config.applyPreset(this.value);
 });
 
-// "walls" btn not in Menu obj:
 // turning walls on should remove particles outside of screen
 document.querySelector("#inputWallsCheck").addEventListener("change", function() {
-    if (this.checked == true) particles = particles.filter(
+    if (this.checked) particles = particles.filter(
         p => p.onscreen && 
         p.y - p.radius > 0 && 
         p.y + p.radius < h);
     Config.wallsEnabled = this.checked;
 });
 
+// menu inputs (except preset select, walls checkbox, clear btn)
 for (let propName in Menu.inputs) {
     const input = Menu.inputs[propName];
     const eType = input.type === "range" ? "input" : "change";
     input.element.addEventListener(eType, function() {
-        Config.setCustom();
+        Config.useCustom();
         switch (input.type) {
             // thank you closures for making this possible lmao
             

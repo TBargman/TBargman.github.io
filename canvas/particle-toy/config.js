@@ -24,7 +24,6 @@ export const Config = {
     fadeEffect: true,
     blurEnabled: false,
     applyPreset: function(preset) {
-        Config.presetName = preset;
         for (let prop in Presets[preset]) this[prop] = Presets[preset][prop];
         
         // update menu
@@ -44,7 +43,7 @@ export const Config = {
         }
         Menu.performance.maxParticles.textContent = `${Menu.performance.getMaxParticles()} (approx.)`;
     },
-    setCustom: function() {
+    useCustom: function() {
         Menu.presetInput.value = "custom";
         for (let propName in Presets.custom) {
             Presets.custom[propName] = Config[propName];
@@ -52,6 +51,10 @@ export const Config = {
     }
 };
 
+// setValue() converts the displayed value and
+// sets the Config key and/or do other things.
+// getValue() converts the Config value and returns
+// what will be shown in the display element.
 export const Menu = {
     presetInput: document.querySelector("#inputPreset"),
     inputs: {
@@ -106,7 +109,7 @@ export const Menu = {
             display: document.querySelector("#valueMaxLife"),
             unit: " sec",
             setValue: (val) => {
-                if (val === 10.1) Config.maxLife = -1;
+                if (val > 10) Config.maxLife = -1;
                 else Config.maxLife = val * 1000;
             },
             getValue: () => {
@@ -226,15 +229,15 @@ export const ColorSchemes = {
         "251,147,0",
         "245,230,202"],
     "idk2": [
-        "106,44,112",
-        "184,59,94",
-        "240,138,93",
-        "249,237,105"],
-    "idk3": [
         "0,168,204",
         "0,80,130",
         "0,8,57",
         "255,164,27"],
+    "sunset": [
+        "106,44,112",
+        "184,59,94",
+        "240,138,93",
+        "249,237,105"],
     "smoke": [
         "73,77,91",
         "94,92,115",
