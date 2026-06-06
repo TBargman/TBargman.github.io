@@ -11,9 +11,9 @@ My current obsession is drawing things programmatically, and the HTML5 canvas is
 [[Source]](https://github.com/TBargman/TBargman.github.io/tree/main/FH5DB)
 Wait, an actual finished project? Yeah mostly! I'm a big fan of the Forza Horizon games, and with over 900 cars in Horizon 5, it'd be nice to have a way to browse through all of them and see at least the basic related stats/info. With a few custom components included, this mainly started as a project to dynamically create a form used to filter through JSON data. A FilterForm class takes a JS object (and an array of chosen filters) and creates the entire form from it. Comes complete with fancy animations, custom components and dynamically loading results as you scroll down the page. As with everything else posted here, this page looks best on mobile browsers and will probably look weird elsewhere.
 
-### ~~[Garden thing][garden]~~
-[[Source]](https://github.com/TBargman/TBargman.github.io/tree/main/garden)
-My first "big" project I started as a way to get my feet wet with Javascript. It was very early in my journey and so, inevitably, the code became a wild and highly unorganized spaghetti mess 🤢 I don't see myself going back to this without starting over from scratch.
+### [Word Search][wordsearch]
+[[Source]](https://github.com/TBargman/TBargman.github.io/tree/main/word-search)
+A Word Search game.
 
 ### [Yotsee][yah]
 [[Source]](https://github.com/TBargman/TBargman.github.io/tree/main/yotsee)
@@ -38,7 +38,7 @@ Inspired by [this video](https://www.tiktok.com/@cbmemess/video/7424512892726430
 Wow, collision detection is a bitch. This should've been done with Canvas anyway haha. It's not very exciting, as icons target each other too well and it's all over quickly.
 
 [fh5db]: ./FH5DB/
-[garden]: ./garden/
+[wordsearch]: ./word-search/
 [canvas]: ./canvas/index.md
 [yah]: ./yotsee/
 [infcar]: ./infcar/
